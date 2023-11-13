@@ -1,0 +1,31 @@
+{
+  "name": "mongoDBSocialNetworkApi",
+  "version": "1.0.0",
+  "description": "Mongoose back-end project",
+  "main": "server.js",
+  "license": "MIT",
+  "author": "Tom Fusco",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server",
+    "seed": "node utils/seed",
+    "heroku-postbuild": "node utils/seed.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^7.0.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"    
+  }, 
+  "keywords": [
+    "js",
+    "dotenv",
+    "node",
+    "express",
+    "mongoDB",
+    "noSqlBooster",
+    "chromecastify"
+  ]
+}
