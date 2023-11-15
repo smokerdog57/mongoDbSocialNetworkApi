@@ -15,8 +15,6 @@ Because this application won’t be deployed, create a walkthrough video that de
 
 *** Directory Structure
 
-this directory structure needs to be modified for the Mongoose ODM.
-
 project-root/
   ├── config/
   │      ├── connection.js
@@ -309,13 +307,17 @@ https://opensource.org/licenses/Artistic-2.0
 1. Sandy Smith (tutor):  Sandy helped me understand the acceptance criteria.
 
 ## Tests
+lernantino_id:	6554249a4950eea581f50a09
+amiko_id:  	655424d84950eea581f50a0b
+thought_id:	655426784950eea581f50a0f
+reaction_id:	"655426cf4950eea581f50a11		
 
-```
-Test001: PASSED.  At the CLI:  npm run start and verify server.js is run and starts listening on port 3001 without errors.
-Test002: PASSED.  start the server and from insomnia send a POST to http://localhost3001/api/users/ to add a user.
-Test003: PASSED.  start the server and from insomnia send a PUT to http://localhost3001/api/users/ to update a user.
+Test001: PASSED.	At the CLI:  npm run start and verify server.js is run and starts listening on port 3001 without errors.
+Test002: PASSED.	start the server and from insomnia send a POST to http://localhost3001/api/users/ to add a user.  response is User json which includes user contents and friendCount virtual.
+Test003: PASSED.	start the server and from insomnia send a POST to http://localhost3001/api/thoughts/ to add a thought
+Test004: PASSED.	start the server and from insomnia send a POST to http://localhost:3001/api/thoughts/thoughtID/reactions/ to add a reaction to a thought
+Test005: FAILED.	start the server and from insomnia send a GET to http://localhost3001/api/users/ to get all users.  The thought field should include thought id if there is one, friends field should include friend id if there is one and all other fields _id, username, email and friendcount should be included.
 
-"_id":ObjectId("65513b5f575a1f5f666c34ae")
 ```
 
 ## Questions

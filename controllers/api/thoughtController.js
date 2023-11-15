@@ -1,4 +1,9 @@
-const { User, Thought } = require('../../models');
+// /controllers/thoughtController
+
+// Dependencies
+const mongoose = require('mongoose');
+const { User, Thought} = require('../../models');
+const Reaction = require('../../models/Reaction'); // Adjust the path as needed
 
 // Define your controller functions for user routes here
 const thoughtController = {
@@ -73,28 +78,30 @@ const thoughtController = {
             res.status(500).json(err);
         }
     },
-
-    //POST to add a new reaction to a thought
+    // Post new reaction to a thought
     async createReaction(req, res) {
-        console.log('You are adding a reaction');
-        console.log(req.body);
-
-        try {
-            const thought = await Thought.findOneAndUpdate(
-                { _id: req.params.thoughtId },
-                { $addToSet: { reactions: req.body } },
+               try {
+            const { thoughtId } = req.params;
+            const { reactionBody, username } = req.body;
+            // Validate that required fields are present
+            if (!thoughtId || !reactionBody || !username) {
+                return res.status(400).json({ message: 'Invalid request. Missing required fields.' });
+            }
+            
+            const thought = await Thought.findByIdAndUpdate(
+                {_id: thoughtId},
+                { $addToSet: { reactions: req.body} },
                 { runValidators: true, new: true }
             );
-
+            
             if (!thought) {
-                return res
-                    .status(404)
-                    .json({ message: 'No thought found with that ID :(' });
+                return res.status(404).json({ message: 'No thought found with that ID :(' });
             }
-
-            res.json(user);
+            
+            res.json(thought);
         } catch (err) {
-            res.status(500).json(err);
+            console.error(err);
+            res.status(500).json({ message: 'Internal Server Error' });
         }
     },
 

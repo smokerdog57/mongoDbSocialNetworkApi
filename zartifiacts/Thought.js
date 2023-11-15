@@ -1,9 +1,7 @@
-// /models/Thought
-
-// Dependencies
 const { Schema, model } = require('mongoose');
-const Reaction = require('../models/Reaction')
-const dateFormat = require('../utils/dateFormat');
+const dateFormat = require('../utils/dateFormat'); 
+
+const reactionSchema = require('./Reaction'); // Import the Reaction schema
 
 const thoughtSchema = new Schema(
   {
@@ -22,9 +20,7 @@ const thoughtSchema = new Schema(
       type: String,
       required: true,
     },
-    reactions: [
-      Reaction
-    ],
+    reactions: [reactionSchema], // Embed the Reaction schema directly
   },
   {
     toJSON: {
