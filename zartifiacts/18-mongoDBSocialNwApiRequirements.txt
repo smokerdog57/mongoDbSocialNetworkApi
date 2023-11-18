@@ -306,17 +306,31 @@ https://opensource.org/licenses/Artistic-2.0
 
 1. Sandy Smith (tutor):  Sandy helped me understand the acceptance criteria.
 
-## Tests
-lernantino_id:	6554249a4950eea581f50a09
-amiko_id:  	655424d84950eea581f50a0b
-thought_id:	655426784950eea581f50a0f
-reaction_id:	"655426cf4950eea581f50a11		
+## Tests                 
+lernantino_id:		
+amiko_id:  		
+thought_id (lernantino):	
+thought_id (amiko):		
+reaction_id:		
 
 Test001: PASSED.	At the CLI:  npm run start and verify server.js is run and starts listening on port 3001 without errors.
-Test002: PASSED.	start the server and from insomnia send a POST to http://localhost3001/api/users/ to add a user.  response is User json which includes user contents and friendCount virtual.
-Test003: PASSED.	start the server and from insomnia send a POST to http://localhost3001/api/thoughts/ to add a thought
-Test004: PASSED.	start the server and from insomnia send a POST to http://localhost:3001/api/thoughts/thoughtID/reactions/ to add a reaction to a thought
-Test005: FAILED.	start the server and from insomnia send a GET to http://localhost3001/api/users/ to get all users.  The thought field should include thought id if there is one, friends field should include friend id if there is one and all other fields _id, username, email and friendcount should be included.
+Test002: PASSED.	CREATE USERstart the server and from insomnia send a POST to http://localhost3001/api/users/ to add a user.  response is User json which includes user contents and friendCount virtual.
+Test003: PASSED.	CREATE THOUGHT. start the server and from insomnia send a POST to http://localhost3001/api/thoughts/ to add a thought
+Test004: PASSED.	CREATE REACTION TO THOUGHT. start the server and from insomnia send a POST to http://localhost:3001/api/thoughts/thoughtID/reactions/ to add a reaction to a thought
+other fields _id, username, email and friendcount should be included. 
+Test005: PASSED.	ADD FRIEND TO USER.  start the server and from insomnia send a POST to http://localhost3001/api/:users/userId/friends/:friendId. The response json should include: user key/values including friend id. 
+Test006: PASSED.	UPDATE USER BY ID.  start the server and from insomnia send a POST to http://localhost3001/api/users/:userId/. The response should include: user json.
+Test007: PASSED.	GET ALL USERS. start the server and from insomnia send a GET to http://localhost3001/api/users/ to get all users.  The response json object should include all users including:thought field should include thought id if there is one, friends field should include friend id if there is one and other user fields including _id, username and email and friendCount.
+Test008: PASSED.	GET USER BY ID.  start the server and from insomnia send a GET to http://localhost3001/api/users/:userid to get single user..  The response json should include single user including populated thought and firend data.  [mockup 2].
+Test009: PASSED.  CREATE Thought for amiko.
+Test00A: PASSED.	GET ALL THOUGHTS. start the server and from insomnia send a GET to http://localhost3001/api/thoughts/ to get all thoughts.  The response json object should include all thoughts. [mockup 1].
+Test00B: PASSED.	UPDATE THOUGHT BY ID..  start the server and from insomnia send a POST to http://localhost3001/api/thoughts/:thoughtId/. The response should include: thought json. [no mockup].
+Test00C: PASSED.	GET THOUGHT BY ID.  start the server and from insomnia send a GET to http://localhost3001/api/thoughts/:thoughtId/. The response should include: thought json. [mockup 2].
+Test00D: PASSED.	DELETE REACTION BY ID.  start the server and from insomnia send a DELETE to http://localhost3001/api/thoughts/:thoughtId/reactions/:reactionId. The response should include: thought json. [no mockup]. Error:  reaction is not deleted.
+Test00E: PASSED.	DELETE THOUGHT BY ID.  start the server and from insomnia send a DELETE TO http://localhost3001/api/users/:thoughtId/ The response should include: thought json. [no mockup]. 
+Test00F: PASSED.	DELETE FRIEND.  start the server and from insomnia send a DELETE TO http://localhost3001/api/users/:userId/ friends/:friendId/.  The response should include: user json showing friend is not there.. [no mockup]. 
+Test00G: PASSED	DELETE USER AND ASSOCIATED THOUGHTS.  start the server and from insomnia send a DELETE TO http://localhost3001/api/users/:userId.  The response should include: msg: User and associated thoughts deleted.   [mockup 3]. 
+
 
 ```
 

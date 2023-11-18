@@ -2,7 +2,7 @@
 
 // Dependencies
 const mongoose = require('mongoose');
-const { User, Thought} = require('../../models');
+const { User, Thought } = require('../../models');
 const Reaction = require('../../models/Reaction'); // Adjust the path as needed
 
 // Define your controller functions for user routes here
@@ -35,10 +35,23 @@ const thoughtController = {
         }
     },
 
-    //POST a new thought
+    // POST a new thought
     async createThought(req, res) {
         try {
+            // Create a new thought using the data from the request body
             const thought = await Thought.create(req.body);
+
+            // Get the user ID from the request body or wherever it's available
+            const username = req.body.username; // Assuming there is a userId in the request body
+
+            // Update the associated user's thoughts array
+            await User.findOneAndUpdate(
+                { username: username },
+                { $push: { thoughts: thought._id } },
+                { new: true }
+            );
+
+            // Respond with the newly created thought
             res.json(thought);
         } catch (err) {
             console.log(err);
@@ -74,30 +87,32 @@ const thoughtController = {
                 res.status(404).json({ message: 'No thought with that ID' });
             }
 
+            res.json({ message: 'Thought successfully deleted' });
+
         } catch (err) {
             res.status(500).json(err);
         }
     },
     // Post new reaction to a thought
     async createReaction(req, res) {
-               try {
+        try {
             const { thoughtId } = req.params;
             const { reactionBody, username } = req.body;
             // Validate that required fields are present
             if (!thoughtId || !reactionBody || !username) {
                 return res.status(400).json({ message: 'Invalid request. Missing required fields.' });
             }
-            
+
             const thought = await Thought.findByIdAndUpdate(
-                {_id: thoughtId},
-                { $addToSet: { reactions: req.body} },
+                { _id: thoughtId },
+                { $addToSet: { reactions: req.body } },
                 { runValidators: true, new: true }
             );
-            
+
             if (!thought) {
                 return res.status(404).json({ message: 'No thought found with that ID :(' });
             }
-            
+
             res.json(thought);
         } catch (err) {
             console.error(err);
@@ -110,7 +125,7 @@ const thoughtController = {
         try {
             const thought = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId },
-                { $pull: { reaction: { reactionId: req.params.reactionId } } },
+                { $pull: { reactions: { _id: req.params.reactionId } } },
                 { runValidators: true, new: true }
             );
 
