@@ -307,9 +307,9 @@ https://opensource.org/licenses/Artistic-2.0
 1. Sandy Smith (tutor):  Sandy helped me understand the acceptance criteria.
 
 ## Tests                 
-lernantino_id:		
-amiko_id:  		
-thought_id (lernantino):	
+lernantino_id:		6558c0ce40256282a3cd2302
+amiko_id:  		6558c0f940256282a3cd2307
+thought_id (lernantino):	6558c0df40256282a3cd2304
 thought_id (amiko):		
 reaction_id:		
 
